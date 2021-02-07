@@ -1,0 +1,28 @@
+# Bloc services : contient la liste des conteneur à instancier
+services:
+  nginx:
+    container_name: nginx01
+    image: nginx:1.19
+    ports:
+      - "8085:80"
+    networks:
+      - demo_compose_net
+  
+  # Commentaire
+  apache:
+    container_name: apache01
+    image: httpd
+    ports:
+      - "8086:80"
+    networks:
+      - demo_compose_net
+
+# Block networks : définition d'un network dédié à mon appli
+networks:
+  demo_compose_net:
+    name: demo_compose_net
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.16.238.0/24
